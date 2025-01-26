@@ -1,0 +1,16 @@
+# KiCad Temporary/Backup
+*/*.kicad_pcb-bak
+*/*.kicad_sch-bak
+*/*.bck
+*/*-backups/
+*/_autosave-*
+
+# Manufacturing outputs
+*/*.gbr         # Gerber files for PCB manufacturing
+*/*.drl         # Drill files showing hole locations
+*/*.net         # Netlist files describing electrical connections
+*/*.zip         # Zipped production files for manufacturers
+
+.DS_Store
+
+
