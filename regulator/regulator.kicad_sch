@@ -1179,16 +1179,6 @@
 	)
 	(wire
 		(pts
-			(xy 190.5 93.98) (xy 190.5 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b95016d1-bb3f-4a34-a20d-428180c1809b")
-	)
-	(wire
-		(pts
 			(xy 160.02 96.52) (xy 160.02 93.98)
 		)
 		(stroke
@@ -1841,7 +1831,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.01uF"
+		(property "Value" "2.2uF"
 			(at 163.83 101.5999 0)
 			(effects
 				(font
@@ -1911,7 +1901,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2.2uF"
+		(property "Value" "0.01uF"
 			(at 152.4 107.9499 0)
 			(effects
 				(font
