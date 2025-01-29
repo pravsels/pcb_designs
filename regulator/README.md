@@ -49,16 +49,16 @@
 
 ## Key Concepts
 
-### Power Stability
+### How Capacitors Work
 
-- Sudden current draws from devices can cause voltage fluctuations (V = IR)
-- Capacitors act like tiny, fast batteries to maintain stable voltage
-- Different capacitor sizes handle different types of fluctuations:
+- Two conductive plates separated by insulator (dielectric)
+- When voltage applied, charges separate onto plates
+- This separation creates an electric field storing energy
 
-- Larger caps (C2) handle slower, bigger current changes
-- Smaller caps (C1, C3) catch quick spikes
-
-
+Acts like inertia for voltage:
+- If circuit voltage tries to rise: capacitor absorbs charge, fighting the increase
+- If circuit voltage tries to drop: capacitor releases charge, fighting the decrease
+- This resistance to change helps smooth out fluctuations
 
 ### Load Current
 
@@ -70,4 +70,6 @@ Devices draw varying amounts of current:
 - Motors: several amps (very variable)
 
 C2 maintains 3.3V while regulator adjusts to load changes
+- Sudden current changes try to change voltage (V = IR)
+- Capacitors resist these voltage changes by releasing/absorbing charge
 
