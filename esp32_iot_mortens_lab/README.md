@@ -15,3 +15,11 @@ The following features must be integrated:
 
 The board will measure 80x80mm and it will be a 4 layer board design
 
+
+## USB-C device pins 
+
+- VBUS & GND → Power and ground.
+- D+ & D- → USB 2.0 data transfer.
+- CC1 & CC2 → Orientation detection & role negotiation.
+- SBU1 & SBU2 → Used for alternate modes like DisplayPort.
+
