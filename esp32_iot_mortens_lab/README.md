@@ -16,10 +16,53 @@ The following features must be integrated:
 The board will measure 80x80mm and it will be a 4 layer board design
 
 
-## USB-C device pins 
+## USB-C to UART subcircuit
+
+- USB-C input 
+- USBLC6-2P6 for ESD (electro-static discharge) protection 
+- CPI2104 for USB to UART conversion 
+
+
+### USB-C device pins 
 
 - VBUS & GND → Power and ground.
 - D+ & D- → USB 2.0 data transfer.
 - CC1 & CC2 → Orientation detection & role negotiation.
 - SBU1 & SBU2 → Used for alternate modes like DisplayPort.
+
+
+### USBLC and CP Background 
+
+What is USBLC?
+
+USBLC refers to USB Line Protection Components, specifically USB ESD protection diodes. 
+These components are used to protect USB data lines (D+ and D-) from electrostatic discharge (ESD), voltage spikes, and electromagnetic interference (EMI).
+
+How USBLC Works: 
+
+    - The diodes inside the USBLC component act as voltage clamps, preventing voltage spikes from damaging sensitive electronics.
+    - They redirect excessive voltage surges (e.g., static electricity from plugging in a USB cable) away from the USB data lines and safely discharge them to ground.
+    - This prevents damage to USB transceivers like the CP2104.
+    - The USBLC6-2P6 in the circuit is a 6-line ESD protection device, designed to handle fast transient voltage surges.
+
+
+Why Are USB Data Lines Protected ?
+
+USB ports are externally exposed, making them vulnerable to electrostatic discharge (ESD), voltage spikes, and RF noise. 
+Without protection, several issues may arise:
+
+    - ESD discharge (up to ±15kV) can instantly destroy a USB transceiver.
+    - Voltage spikes from hot-plugging can cause glitches, corrupted data, or permanent damage.
+    - Electromagnetic interference (EMI) can introduce noise and distort USB communication.
+    - Using USBLC ensures stable and reliable data transfer while protecting the circuit.
+
+
+What is CP2104 ?
+
+CP2104 belongs to the CP210x series, a USB-to-UART bridge IC family developed by Silicon Labs.
+
+How CP2104 Works: 
+
+    - Converts USB data (D+ and D-) into UART signals (TX, RX).
+    - Enables a USB host (e.g., a PC) to communicate with microcontrollers or embedded systems via serial UART.
 

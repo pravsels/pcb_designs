@@ -6821,7 +6821,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 69.85) (xy 58.42 67.31)
+			(xy 67.31 69.85) (xy 67.31 67.31)
 		)
 		(stroke
 			(width 0)
@@ -6831,7 +6831,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 52.07) (xy 101.6 52.07)
+			(xy 81.28 54.61) (xy 99.06 54.61)
 		)
 		(stroke
 			(width 0)
@@ -6861,7 +6861,7 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 62.23) (xy 110.49 62.23)
+			(xy 99.06 62.23) (xy 106.68 62.23)
 		)
 		(stroke
 			(width 0)
@@ -6891,7 +6891,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 69.85) (xy 78.74 69.85)
+			(xy 67.31 69.85) (xy 78.74 69.85)
 		)
 		(stroke
 			(width 0)
@@ -6901,7 +6901,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 59.69) (xy 58.42 59.69)
+			(xy 67.31 59.69) (xy 58.42 59.69)
 		)
 		(stroke
 			(width 0)
@@ -6911,7 +6911,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 55.88) (xy 81.28 52.07)
+			(xy 81.28 55.88) (xy 81.28 54.61)
 		)
 		(stroke
 			(width 0)
@@ -6921,7 +6921,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 54.61) (xy 78.74 54.61)
+			(xy 67.31 54.61) (xy 78.74 54.61)
 		)
 		(stroke
 			(width 0)
@@ -6941,7 +6941,7 @@
 	)
 	(wire
 		(pts
-			(xy 78.74 55.88) (xy 78.74 54.61)
+			(xy 78.74 54.61) (xy 78.74 55.88)
 		)
 		(stroke
 			(width 0)
@@ -6951,7 +6951,7 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 69.85) (xy 101.6 69.85)
+			(xy 81.28 69.85) (xy 99.06 69.85)
 		)
 		(stroke
 			(width 0)
@@ -6961,7 +6961,7 @@
 	)
 	(wire
 		(pts
-			(xy 62.23 59.69) (xy 62.23 54.61)
+			(xy 67.31 59.69) (xy 67.31 54.61)
 		)
 		(stroke
 			(width 0)
@@ -7001,7 +7001,7 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 69.85) (xy 101.6 62.23)
+			(xy 99.06 69.85) (xy 99.06 62.23)
 		)
 		(stroke
 			(width 0)
@@ -7021,6 +7021,16 @@
 	)
 	(wire
 		(pts
+			(xy 67.31 67.31) (xy 58.42 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a58c1866-1732-4af2-bd03-2ad67d39fc15")
+	)
+	(wire
+		(pts
 			(xy 54.61 67.31) (xy 58.42 67.31)
 		)
 		(stroke
@@ -7031,7 +7041,7 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 59.69) (xy 110.49 59.69)
+			(xy 99.06 59.69) (xy 106.68 59.69)
 		)
 		(stroke
 			(width 0)
@@ -7081,7 +7091,7 @@
 	)
 	(wire
 		(pts
-			(xy 101.6 52.07) (xy 101.6 59.69)
+			(xy 99.06 54.61) (xy 99.06 59.69)
 		)
 		(stroke
 			(width 0)
@@ -7137,10 +7147,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "00bb554e-312f-4154-93ce-f3aa5d70b1fc")
 		(property "Reference" "U2"
-			(at 91.44 54.6414 90)
+			(at 91.186 64.008 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7148,7 +7157,7 @@
 			)
 		)
 		(property "Value" "USBLC6-2P6"
-			(at 91.44 57.1814 90)
+			(at 91.186 66.548 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8773,7 +8782,7 @@
 	)
 	(symbol
 		(lib_id "Interface_USB:CP2104")
-		(at 123.19 67.31 0)
+		(at 119.38 67.31 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -8782,7 +8791,7 @@
 		(fields_autoplaced yes)
 		(uuid "cf1acbde-3c6f-4092-8348-6760ee3d12c0")
 		(property "Reference" "U3"
-			(at 125.3841 95.25 0)
+			(at 121.5741 95.25 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8791,7 +8800,7 @@
 			)
 		)
 		(property "Value" "CP2104"
-			(at 125.3841 97.79 0)
+			(at 121.5741 97.79 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8800,7 +8809,7 @@
 			)
 		)
 		(property "Footprint" "Package_DFN_QFN:QFN-24-1EP_4x4mm_P0.5mm_EP2.6x2.6mm"
-			(at 152.4 119.38 0)
+			(at 148.59 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8810,7 +8819,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.silabs.com/documents/public/data-sheets/cp2104.pdf"
-			(at 228.6 57.15 0)
+			(at 224.79 57.15 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8819,7 +8828,7 @@
 			)
 		)
 		(property "Description" "Single-Chip USB-to-UART Bridge, USB 2.0 Full-Speed, 2Mbps UART, QFN-24"
-			(at 123.19 67.31 0)
+			(at 119.38 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
