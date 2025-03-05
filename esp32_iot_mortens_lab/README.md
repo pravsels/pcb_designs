@@ -66,3 +66,22 @@ How CP2104 Works:
     - Converts USB data (D+ and D-) into UART signals (TX, RX).
     - Enables a USB host (e.g., a PC) to communicate with microcontrollers or embedded systems via serial UART.
 
+
+Why do we need pull-down resistors for the CC pins ? 
+
+In USB-C, the CC pin is used for detection. The USB host (computer or charger) applies voltage to CC, 
+and the device (your circuit) is supposed to pull it down slightly with a 5.1kΩ resistor.
+
+| **Case**                            | **Voltage on CC Pin** | **What the USB Host Thinks**            |
+|-------------------------------------|-----------------------|-----------------------------------------|
+| ✅ **Correct: 5.1kΩ pull-down**     | ~0.6V                 | "USB 2.0 device attached"               |
+| ❌ **No resistor (floating CC)**    | Unknown / unstable    | Device may not be detected              |
+| ❌ **Direct connection to GND**     | 0V                    | Host may think there's a short circuit  |
+
+
+Without a Resistor:
+
+    - The CC pin could pick up noise, making the voltage random and unstable.
+    - The USB host won't detect the device properly because it expects a specific voltage drop caused by the 5.1kΩ resistor.
+    - The USB host might not enable power or data transfer because it doesn't detect a valid connection.
+
