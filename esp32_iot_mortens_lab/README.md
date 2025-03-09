@@ -85,3 +85,44 @@ Without a Resistor:
     - The USB host won't detect the device properly because it expects a specific voltage drop caused by the 5.1kΩ resistor.
     - The USB host might not enable power or data transfer because it doesn't detect a valid connection.
 
+
+### Inductor and Fuse Background 
+
+1. Inductor (FB1 - Ferrite Bead)
+
+🔹 Component: BLM21PG221 (Ferrite Bead)
+
+🔹 Purpose: Filters high-frequency noise (EMI suppression)
+
+Why It’s Needed
+
+    - USB power (VBUS) carries noise from chargers, PCs, and RF sources (Wi-Fi, Bluetooth).
+    - A ferrite bead acts as a low-pass filter, allowing DC power while blocking high-frequency noise.
+    - Prevents EMI from affecting USB signals and internal components.
+
+How It Works
+
+    - Placed in series with +5VP, so all power passes through it first.
+    - DC power flows normally, but high-frequency noise is blocked.
+    - Improves signal integrity, reducing interference in the CP2104 and other circuits.
+
+
+2. Fuse (F2 - Polyfuse 1A)
+
+🔹 Component: Polyfuse 1A (Resettable Fuse)
+
+🔹 Purpose: Protects against overcurrent and short circuits
+
+Why It’s Needed
+
+    - USB power has current limits—excess draw can damage components.
+    - A short circuit could cause dangerous current spikes.
+    - The fuse limits current to 1A and disconnects power if exceeded.
+
+How It Works
+
+    - Placed in series with VBUS (+5V).
+    - Normal operation: Passes power if current is < 1A.
+    - Overcurrent event (e.g., short circuit): Cuts power if >1A, preventing damage.
+    - Auto-resetting: Unlike regular fuses, it recovers when cooled down.
+
