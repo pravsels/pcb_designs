@@ -126,3 +126,19 @@ How It Works
     - Overcurrent event (e.g., short circuit): Cuts power if >1A, preventing damage.
     - Auto-resetting: Unlike regular fuses, it recovers when cooled down.
 
+
+### Capacitors 
+
+Why we need capacitors 
+
+- Stabilize voltage: prevent sudden drops or spikes that can reset or disturb ICs.
+- Filter noise: clean up high-frequency and low-frequency noise from USB power (VBUS).
+- Ensure reliable USB communication: avoid data errors caused by unstable voltage.
+
+| **Capacitor** | **Value**  | **Purpose**                                                               | **Why It's Needed (Reasoning)**                                                                                                                                             |
+|---------------|------------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **C4**        | 22 µF      | **Bulk decoupling** for low-frequency noise and large voltage swings.     | Smooths out **slow** changes in USB VBUS, handles large current draws (e.g., device startup).                                                                               |
+| **C3**        | 4.7 µF     | **Mid-frequency filtering** for medium-speed noise.                       | Absorbs **medium-speed** disturbances that bulk cap (C4) is too slow for, and small cap (C2) can't handle.                                                                  |
+| **C2**        | 100 nF     | **High-frequency decoupling** for fast noise and transients.              | Filters **high-frequency noise** caused by CP2104's **fast internal switching** (USB traffic, UART activity), provides quick bursts of current when needed.                 |
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
