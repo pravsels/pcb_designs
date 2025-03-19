@@ -135,10 +135,62 @@ Why we need capacitors
 - Filter noise: clean up high-frequency and low-frequency noise from USB power (VBUS).
 - Ensure reliable USB communication: avoid data errors caused by unstable voltage.
 
-| **Capacitor** | **Value**  | **Purpose**                                                               | **Why It's Needed (Reasoning)**                                                                                                                                             |
-|---------------|------------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **C4**        | 22 µF      | **Bulk decoupling** for low-frequency noise and large voltage swings.     | Smooths out **slow** changes in USB VBUS, handles large current draws (e.g., device startup).                                                                               |
-| **C3**        | 4.7 µF     | **Mid-frequency filtering** for medium-speed noise.                       | Absorbs **medium-speed** disturbances that bulk cap (C4) is too slow for, and small cap (C2) can't handle.                                                                  |
-| **C2**        | 100 nF     | **High-frequency decoupling** for fast noise and transients.              | Filters **high-frequency noise** caused by CP2104's **fast internal switching** (USB traffic, UART activity), provides quick bursts of current when needed.                 |
----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Capacitor** | **Value**  | **Purpose**                                                               | **Why It's Needed (Reasoning)**                                                                                                                               |
+|---------------|------------|---------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **C4**        | 22 µF      | **Bulk decoupling** for low-frequency noise and large voltage swings.     | Smooths out **slow** changes in USB VBUS, handles large current draws (e.g., device startup).                                                                 |
+| **C3**        | 4.7 µF     | **Mid-frequency filtering** for medium-speed noise.                       | Absorbs **medium-speed** disturbances that bulk cap (C4) is too slow for, and small cap (C2) can't handle.                                                    |
+| **C2**        | 100 nF     | **High-frequency decoupling** for fast noise and transients.              | Filters **high-frequency noise** caused by CP2104's **fast internal switching** (USB traffic, UART activity), provides quick bursts of current when needed.   |
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+
+### CP2104 Important Pins and Their Functions
+
+| **Pin**  | **Function**                  | **What You Connect**                                     | **Required?**                                    |
+|----------|-------------------------------|----------------------------------------------------------|--------------------------------------------------|
+| **RST**  | Resets the chip (Active-Low)  | **Pull-up resistor (4.7kΩ - 10kΩ)**                      | ✅ Yes, otherwise random resets may happen.      |
+| **VDD**  | Main Power Supply             | **100nF + 1µF capacitor**                                | ✅ Yes, provides power to CP2104.                |
+| **VIO**  | Sets logic level for I/O pins | **Tie to 3.3V (or system voltage), add 100nF capacitor** | ✅ Yes, must match the system logic voltage.     |
+| **VPP**  | Factory programming voltage   | **Usually leave unconnected**                            | ❌ No, unless you're programming the chip.       |
+---------------------------------------------------------------------------------------------------------------------------------------------------------|
+
+### Power Distribution in the CP2104 Circuit
+
+| **Power Label** | **Voltage**        | **Source**                               | **Used For**                                 |
+|-----------------|--------------------|------------------------------------------|----------------------------------------------|
+| **+5VP**        | 5V (Raw USB Power) | USB Connector (J5)                       | Direct USB power (before filtering).         |
+| **+5V**         | 5V (Filtered)      | After Ferrite Bead (FB1) & Polyfuse (F2) | Powering components, feeding 3.3V regulator. |
+| **+3.3VA**      | 3.3V (Regulated)   | From Regulator (CP2104 or external)      | Powering CP2104 and any other 3.3V devices.  |
+---------------------------------------------------------------------------------------------------------------------------------|
+
+Why is it Called Analog (+3.3VA)?
+
+In mixed-signal circuits (where digital and analog components coexist), we often separate their power supplies to reduce noise. 
+The "A" in +3.3VA stands for Analog, meaning this power rail is meant for sensitive components that need a cleaner voltage supply.
+
+
+### Difference Between Analog and Digital Power
+
+| **Type**          | **Characteristics**                                                         | **Where It's Used?**                          |
+|-------------------|-----------------------------------------------------------------------------|-----------------------------------------------|
+| **Digital Power** | Supplies **logic circuits** that operate in **discrete steps** (1s and 0s). | Microcontrollers, CPUs, UART, GPIO.           |
+| **Analog Power**  | Supplies **sensitive circuits** that handle **continuous signals**.         | Sensors, ADCs, USB transceivers, RF circuits. |
+--------------------------------------------------------------------------------------------------------------------------------------------------|
+
+
+How Does This Apply to Our Circuit?
+
+    - The CP2104 handles USB signals, which involve continuous waveforms (analog behavior).
+    - If digital noise contaminates the USB transceiver power, it can cause bad signal quality or data errors.
+    - So, "Analog" power (+3.3VA) is labeled separately to indicate that this voltage should be as clean as possible.
+
+
+What Happens If You Use the Same 3.3V for Everything?
+
+    - Digital circuits (GPIO, UART) create noise due to fast switching (MHz speeds).
+    - USB transceivers (analog part of CP2104) are sensitive to noise.
+
+    - If you use the same power line, USB signal quality may degrade, causing:
+        - USB disconnection issues.
+        - Increased bit errors in data transfer.
+        - EMI (Electromagnetic Interference) problems.
 
