@@ -220,3 +220,24 @@ What Happens If You Use the Same 3.3V for Everything?
 | 12       | **RS485 / GPIO.2** | Can be used as **GPIO 2** or **RS485 Direction Control**.           |
 | 11       | **GPIO.3**         | General-purpose I/O pin (user-defined function).                    |
 
+
+### ⚡ General Guideline: Which Components Need Analog Power?
+| **Component Type**        | **Power Type** | **Why?** |
+|--------------------------|--------------|----------|
+| **DACs (Digital-to-Analog Converters)** | **Analog (AVDD)** | Outputs a **continuous signal** that must be clean and low-noise. |
+| **ADCs (Analog-to-Digital Converters)** | **Analog (AVDD)** | Converts weak analog signals into digital data, so noise can distort accuracy. |
+| **Op-Amps & Analog Signal Amplifiers** | **Analog (AVDD)** | Small voltage fluctuations can cause errors, so a **low-noise** power supply is needed. |
+| **Precision Voltage References** | **Analog (AVDD)** | Any noise in the power affects accuracy of **DACs, ADCs, and sensors**. |
+| **RF Circuits (WiFi, Bluetooth, etc.)** | **Analog (AVDD)** | Radio signals are highly sensitive to noise from switching power supplies. |
+| **Sensors (e.g., temperature, pressure, light sensors)** | **Analog (AVDD)** | Sensor output voltages are often weak, so noise from digital circuits can corrupt them. |
+
+
+### 🔌 Which Components Can Use Digital Power?
+| **Component Type**      | **Power Type** | **Why?** |
+|------------------------|--------------|----------|
+| **Microcontrollers (MCUs, CPUs, GPUs)** | **Digital (VDD, DVDD)** | Only handle **1s and 0s**, so noise isn’t a big issue. |
+| **Digital Logic ICs (AND, OR, Flip-Flops, etc.)** | **Digital (VDD)** | Works with binary signals that tolerate noise. |
+| **Flash Memory, RAM, ROM** | **Digital (VDD)** | Purely digital storage, immune to small voltage noise. |
+| **UART, SPI, I2C Communication Interfaces** | **Digital (VDD)** | These protocols use high/low logic levels and are designed to handle small noise margins. |
+| **LEDs & Display Drivers** | **Digital (VDD)** | LEDs and screens are not affected by minor power fluctuations. |
+
