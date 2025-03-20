@@ -197,19 +197,19 @@ What Happens If You Use the Same 3.3V for Everything?
 
 ### UART Communication Pins
 
-|**Pin**| **Name**  | **Direction** | **Function**                                               |
-|-------|-----------|---------------|------------------------------------------------------------|
-| 21    | **TXD**   | Output        | UART Transmit Data (Data sent from CP2104).                |
-| 20    | **RXD**   | Input         | UART Receive Data (Data received by CP2104).               |
-| 19    | **RTS**   | Output        | Request to Send (Flow control, optional).                  |
-| 18    | **CTS**   | Input         | Clear to Send (Flow control, optional).                    |
-| 22    | **DSR**   | Input         | Data Set Ready (Handshake signal, often unused).           |
-| 23    | **DTR**   | Output        | Data Terminal Ready (Handshake signal, often unused).      |
-| 24    | **DCD**   | Input         | Data Carrier Detect (Detects an active serial connection). |
-| 1     | **RI**    | Input         | Ring Indicator (For modems, rarely used in standard UART). |
--------------------------------------------------------------------------------------------------|
+| **Pin** | **Name**  | **Direction** | **Function**                                               |
+|--------|-----------|-------------|------------------------------------------------------------|
+| 21     | **TXD**   | Output      | UART Transmit Data (Data sent from CP2104).                |
+| 20     | **RXD**   | Input       | UART Receive Data (Data received by CP2104).               |
+| 19     | **RTS**   | Output      | Request to Send (Flow control, optional).                  |
+| 18     | **CTS**   | Input       | Clear to Send (Flow control, optional).                    |
+| 22     | **DSR**   | Input       | Data Set Ready (Handshake signal, often unused).           |
+| 23     | **DTR**   | Output      | Data Terminal Ready (Handshake signal, often unused).      |
+| 24     | **DCD**   | Input       | Data Carrier Detect (Detects an active serial connection). |
+| 1      | **RI**    | Input       | Ring Indicator (For modems, rarely used in standard UART). |
 
-## GPIO and Special Function Pins
+
+### GPIO and Special Function Pins
 
 | **Pin**  | **Name**          | **Function**                                                         |
 |----------|-------------------|----------------------------------------------------------------------|
