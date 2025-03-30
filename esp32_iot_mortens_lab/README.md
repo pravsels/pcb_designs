@@ -272,3 +272,82 @@ Programming mode (bootloader mode) is a special boot state in microcontrollers t
 
     - Programming (Bootloader) Mode: Microcontroller waits to receive new firmware.
 
+
+## Relay control sub-circuit 
+
+This sub-circuit is designed to switch a relay on and off using a transistor controlled by a low-voltage input (e.g., from a microcontroller).
+
+### Circuit Components
+
+#### Relay (K1 - RT314A05)
+
+Coil Pins: A1 (+5V), A2 (controlled by transistor)
+
+#### Contacts:
+
+- Pin 11: Common (COM)
+
+- Pin 12: Normally Closed (NC)
+
+- Pin 14: Normally Open (NO)
+
+
+#### Transistor (Q2 - BC817)
+
+Acts as a low-side switch.
+
+#### Pins:
+
+- 1 (Base): Receives control signal (RELAY input).
+
+- 2 (Emitter): Ground
+
+- 3 (Collector): Connected to relay coil
+
+#### Resistors
+
+R15 (1kΩ): Limits base current into transistor.
+
+R14 (10kΩ): Pull-down resistor, ensures transistor stays off by default.
+
+#### Diode (D1 - LL4148)
+
+Flyback diode, protects transistor from voltage spikes when relay coil turns off.
+
+#### LED Indicator (D2 - Yellow) and Resistor (R16 - 1kΩ)
+
+Indicates when the relay coil is energized.
+
+#### Screw Terminal (J2)
+
+External connections for relay contacts.
+
+
+### 🔌 Relay Operation
+| **Component Type**    | **Power Type** | **Why?**                                           |
+|-----------------------|----------------|----------------------------------------------------|
+| **Input (RELAY HIGH)**| **Relay ON**   | Relay energized, connects Pin 11 → Pin 14 (NO).    |
+| **Input (RELAY LOW)** | **Relay OFF**  | Relay de-energized, connects Pin 11 → Pin 12 (NC). |
+
+
+**How does high and low inputs activate different circuits?**
+
+HIGH input (RELAY pin):
+
+    - Current flows into transistor base (Q2) → turns transistor ON.
+
+    - Current from +5V passes through relay coil (K1) → energizes relay.
+
+    - Relay contacts move from default position (Pin 11 → Pin 12) to energized position (Pin 11 → Pin 14), activating the connected NO circuit.
+
+    - LED (D2) lights up, indicating the relay is active.
+
+
+LOW input:
+
+    - No current at transistor base → transistor OFF.
+
+    - Relay coil is not energized → relay contacts return to default (Pin 11 → Pin 12), activating NC circuit.
+
+    - LED turns off.
+
