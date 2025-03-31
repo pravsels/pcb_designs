@@ -360,24 +360,29 @@ to an 8-pin screw terminal (J3), likely for connecting LED strips.
 subcircuit components: 
 
 🔹 U5: 74AHCT245 - Octal Bus Transceiver
+
     - Buffers 8 digital signals, here only using 4 (A0 - A3 to B0 - B3) 
     - Direction is fixed A → B (pin 1 DIR is tied to GND).
     - Output Enable (CE pin 19) is pulled LOW (enabled). 
     - Operates on +5V (pin 20) with GND on pin 10.
 
 🔹 Inputs: LEDSTR1-4 (Pins 2-5)
+
     - These go into A0-A3 and are forwarded to B0-B3 by the transceiver.
 
 🔹 Outputs: B0-B3 (Pins 18-15)
+
     - Buffered versions of inputs. 
     - Each output goes through a 22Ω resistor (R17-R20) to J3 (Pins 2-5).
 
 🔹 J3: 8-Pin Screw Terminal
+
     - Outputs to the external world.
     - Pins 2-5 carry signals for LED strips. 
     - Pins 1 and 6-8 are GND or unused (GND is explicitly provided on pin 7). 
 
 🔹 Power Supply:
+
     - Supplied via screw terminal J4 (pins 1: +5V, 2: GND). 
     - Passes through a fuse (F1) for protection.
     - C1 (1000μF) provides bulk decoupling for inrush when LEDs power up.
@@ -387,6 +392,7 @@ subcircuit components:
 **What's the output enable pin ?** 
 
 It's a control pin on devices like the 74AHCT245 that determines whether the outputs are active or disabled.
+
 In the tranceiver, Pin 19 (CE) is the Output Enable. It's tied to GND, so it's enabled all the time (i.e., outputs are always active).
 
 
@@ -396,7 +402,7 @@ In the tranceiver, Pin 19 (CE) is the Output Enable. It's tied to GND, so it's e
 
 - The buffer cleans up edges (transitions from LOW to HIGH) and ensures strong digital levels. Prevents voltage drop, ringing, or signal degradation on long traces.
 
-- Some buffers support shifting logic levels (e.g., 3.3V logic to 5V signals).
+- Some buffers support shifting logic levels (e.g., 3.3V logic to 5V signals). Allows 3.3V MCU to control 5V logic devices. 
 
 
 **What's the meaning of cleaning up edges ?**
@@ -404,11 +410,13 @@ In the tranceiver, Pin 19 (CE) is the Output Enable. It's tied to GND, so it's e
 When a digital signal switches from LOW (0V) to HIGH (e.g., 3.3V or 5V), it should happen quickly and sharply.
 
 But:
+
     - Microcontrollers or long traces might create slow or noisy transitions (not a clean square wave).
 
     - This can cause unreliable behavior in fast digital circuits.
 
 ✅ What the buffer does:
+
     - It takes that sloppy or weak input signal and re-drives it with a clean, sharp edge — fast rise/fall times, full logic levels.
 
     - Ensures the output is a strong, reliable digital HIGH or LOW.
