@@ -421,3 +421,56 @@ But:
 
     - Ensures the output is a strong, reliable digital HIGH or LOW.
 
+
+
+## Overview of the whole schematic 
+
+
+### Power & Programming Interface 
+
+The USB port delivers 5V and provides serial communication via a USB-to-UART bridge, 
+which includes ESD protection on the data lines. Auto-boot signals (RTS/DTR) allow the 
+ESP32 to enter bootloader mode for hands-free programming. 
+
+
+### 5V to 3.3V LDO 
+
+A linear regulator drops the USB 5V supply to 3.3V for the ESP32 and peripherals, with 
+decoupling capacitors to ensure stable operation. An LED on the 3.3V rail indicates when 
+power is active. 
+
+Note: 'decoupling' implies that the capacitors isolate a device's local power demands from the larger supply rails. By acting as a local energy reservoir, a decoupling capacitor reduces how 
+much sudden current draws or noise in one part of the circuit can affect others. 
+
+
+### ESP32 Module 
+
+A WiFi/Bluetooth enabled ESP32 module, featuring recommended pull-ups, pull-downs and 
+capacitors on its strapping pins, forms the core of the design. The auto-boot circuitry 
+ties into EN and IO0 to simplify firmware flashing. 
+
+### I2C (Qwiic/STEMMA QT)
+
+A dedicated connector offers a 3.3V I2C interface for easily adding sensors and modules. 
+An on-board temperature/humidity sensor resides on the same bus, making use of the same 
+pull-up resistors. 
+
+### LED Driver 
+
+A 74AHCT245 IC level-shifts the 3.3V signals from the ESP32 to 5V logic, buffering 4 data 
+lines that exit via JST-style connectors for driving external LED strips or modules. 
+
+### Relay 
+
+A transistor based driver energizes the relay coil under ESP32 control, with a flyback diode 
+preventing voltage spikes during switch offs. The relay's contacts are exposed for switching external loads at higher voltages and currents. 
+
+### User I/O 
+
+Push buttons for RESET, BOOT or general purpose use, provide direct user interaction. Status LEDs offer visible feedback for various functions. 
+
+### Mounting 
+
+Mounting holes at the corners allow secure attachment to an enclosure or chassis. Keep-out 
+areas around these holes ensure that standoffs or screws won't interfere with nearby components. 
+
