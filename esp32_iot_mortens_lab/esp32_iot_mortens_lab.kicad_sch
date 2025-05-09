@@ -17702,7 +17702,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "iot-thing_Library_11:FUSE_696105003002"
 			(at 347.472 125.73 90)
 			(effects
 				(font
@@ -19722,7 +19722,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "iot-thing_Library_11:SW_Push_1P1T_NO_6x6mm_H9.5mm"
 			(at 31.75 226.06 0)
 			(effects
 				(font
