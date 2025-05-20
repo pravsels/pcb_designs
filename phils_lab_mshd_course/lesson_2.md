@@ -45,4 +45,27 @@ often modeled as a small random noise uniformly distributed in ±½ LSB (least s
 **What is bus-powered device ? **
 A “bus-powered device only” means it draws all its power (up to 500 mA@5 V) from the USB port and never has its own supply or acts as a USB host.
 In this context, the “bus” is the shared set of wires over which both power and data are carried—in USB’s case the four pins (VBUS, GND, D+, D–). 
-A “bus-powered” device takes its 5 V supply directly from that USB bus rather than from any external source.
+
+
+SYSTEM REQUIREMENTS: PROCESSOR
+
+- Low bandwidth and data storage requirements (previous slide: <0.5 Mbit/s in).
+  - FPGA unnecessary. Powerful MCU largely unnecessary (unless we're doing a lot of DSP).
+
+- Ease-of-programming and software development is a plus.
+  Microcontroller beats FPGA by a large margin. Writing in C/C++ rather than VHDL/Verilog.
+- Can use SWD (Serial Wire Debug) or JTAG (Joint Test Action Group) debug protocols.
+
+Peripheral requirements:
+- USB for data streaming.
+- Most likely: SPI (one for ADC, one for DAC).
+
+**SPI vs I2C Speeds:**
+SPI: 1-50 MHz typical, can reach 100+ MHz, full-duplex (simultaneously bidirectional)
+I2C: 100 kHz standard, up to 5 MHz in ultra-fast mode, half-duplex (unidirectional at a given time)
+SPI is substantially faster, making it better suited for timing-critical applications like the ADC/DAC interfaces in your system.
+
+Processing power? Packaging? Brand
+- Not much processing power required (ARM Cortex M0 should suffice, low-ish clock speed).
+- **AVOID** BGA and QFN packages to reduce cost (troubleshooting is also hard).
+
