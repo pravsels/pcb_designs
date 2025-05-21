@@ -15,7 +15,7 @@ What does that mean ?
 
 - Signal generator: need some form of digital to analogue converter (DAC, one channel)
 
-----------------------------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------
 
 an OTG (on the go) USB can act as both a host and as a device. host can supply power and also do a bunch of other coordination. 
 
@@ -46,6 +46,8 @@ often modeled as a small random noise uniformly distributed in ±½ LSB (least s
 A “bus-powered device only” means it draws all its power (up to 500 mA@5 V) from the USB port and never has its own supply or acts as a USB host.
 In this context, the “bus” is the shared set of wires over which both power and data are carried—in USB’s case the four pins (VBUS, GND, D+, D–). 
 
+-----------------------------------------------------------------------------------------------------------------------
+
 
 SYSTEM REQUIREMENTS: PROCESSOR
 
@@ -68,4 +70,35 @@ SPI is substantially faster, making it better suited for timing-critical applica
 Processing power? Packaging? Brand
 - Not much processing power required (ARM Cortex M0 should suffice, low-ish clock speed).
 - **AVOID** BGA and QFN packages to reduce cost (troubleshooting is also hard).
+-----------------------------------------------------------------------------------------------------------------------
+
+
+SYSTEM REQUIREMENTS: POWER SUPPLIES
+
+• Split digital and analogue supplies.
+  • Digital: switching supply for efficiency, digital is far more tolerant of noise. Our digital circuitry draws 100s of mAs maximum.
+  • Analogue: linear (LDO) regulators for improved noise performance. Analogue circuitry typically draws less current (10s of mAs maximum) → regulator efficiency is not much of an issue.
+
+
+• Input power from USB.
+  • (Very) noisy power rail → Requires adequate filtering!
+  • Nominally +5 V. Can go as low as +4.5 V → Watch out for regulator drop-out voltages!
+  • 500 mA max. current (if negotiated with host), 150 mA otherwise.
+
+
+**Why do we use digital and analogue supplies ?**
+
+- Switching regulators give you high efficiency (so less heat and longer battery life) but they switch at high frequency, injecting ripple and EMI onto the rail.
+
+- Digital ICs (MCUs, FPGAs, logic chips) generally tolerate a few tens or hundreds of millivolts of ripple just fine.
+
+- Analogue blocks (ADCs, precision amplifiers, voltage references, sensors) are much more sensitive: even small noise on their supply can translate into measurement error or jitter.
+
+So the common pattern is:
+
+- Use a switcher to feed your “bulk” 3.3 V rail for all the digital bits.
+
+- Tap off that rail with an LDO to create a super-clean 3.3 V (or 1.8 V, 2.5 V, etc.) supply dedicated to analogue circuitry.
+
+-----------------------------------------------------------------------------------------------------------------------
 
