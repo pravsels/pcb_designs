@@ -102,3 +102,31 @@ So the common pattern is:
 
 -----------------------------------------------------------------------------------------------------------------------
 
+SYSTEM REQUIREMENTS: CONVERTERS
+
+• Basics:
+ • More bits = better signal-to-noise (SNR) ratio! ☺
+
+**Why?**
+Smaller slices → smaller quantization error → higher theoretical signal-to-noise ratio (SNR) and dynamic range. 
+In an ideal ADC, every extra bit buys you about 6 dB of SNR (that’s the 6.02 × N rule).
+
+ • Higher sampling rate = higher Nyquist limit and (typically) less aliasing! ☺
+ • → However, in both cases: more data to store/process/stream! ☹
+
+
+• Additional features could include:
+ • Oversampling (to reduce aliasing but ultimately provide a lower output sample-rate).
+ • Anti-aliasing filters incorporated into converter ICs.
+
+**What is aliasing ?**
+Aliasing is what happens when a signal is sampled too slowly:
+- Anything in the input that’s above the Nyquist frequency (½ × sample-rate) “folds” down and shows up as a false, lower-frequency component in the digitized data.
+- Those fake tones can’t be separated from the real ones afterward, so you try to prevent them with an anti-aliasing filter or by sampling faster.
+
+• Interface:
+ • SPI for lower data-rate converters → Perfect for us since we are using an MCU and only require low data-rates.
+ • For more ‘involved’ applications, parallel interfaces, LVDS, etc…
+
+-----------------------------------------------------------------------------------------------------------------------
+
