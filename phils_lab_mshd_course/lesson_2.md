@@ -130,3 +130,44 @@ Aliasing is what happens when a signal is sampled too slowly:
 
 -----------------------------------------------------------------------------------------------------------------------
 
+SYSTEM REQUIREMENTS: ANALOGUE SECTIONS
+
+For ADC:
+- High-impedance (> 1 MΩ?) input buffer with ESD protection, RF filtering.
+
+- Anti-aliasing filter with cut-off at (max.) half the ADC sampling rate (Nyquist limit).
+
+- Potentially: single-ended-to-differential conversion, or differential-to-single-ended conversion.
+
+
+**Why might we need RF filtering ?**
+- Any high-frequency energy (radio stations, Wi-Fi, LTE, nearby switching regulators, clock edges) can couple into long traces or cables that feed a high-impedance ADC input.
+
+- Once inside, non-linear junctions (ESD diodes, sample-and-hold switches, op-amps) can rectify or mix that RF down into the audio/baseband range, showing up as offsets or extra noise.
+
+- RF that sits above Nyquist can also alias into the pass-band if the anti-alias filter lacks enough stop-band rejection at tens-of-MHz.
+
+A small RC or ferrite-bead + capacitor at the connector presents a low-impedance path for RF to ground while leaving your signal band undisturbed, preventing all of those issues
+
+
+**Why do we have high input impedence for ADC but low output impedence for DAC ?**
+for an ADC: 
+- Acts like a voltmeter: must sense the source without drawing current, or the source voltage would drop and the reading be wrong.
+- Many sensors have large source-resistance; a mega-ohm-plus input keeps I ≈ 0, so V_measured ≈ V_true​.
+
+for a DAC: 
+- Acts like a voltage source: must drive downstream loads, cables, or filters without its own voltage changing.
+- A few tens-of-ohms output lets it supply current; the load sees the programmed voltage independent of load variations or external noise.
+
+
+For DAC:s
+- Low-impedance (~ 50 Ω?) output buffer with ESD protection to drive loads.
+
+- Anti-aliasing filter with cut-off at (max.) half the DAC sampling rate (Nyquist limit).
+
+- Potentially: single-ended-to-differential conversion, or differential-to-single-ended conversion.
+
+note: last point means, be ready to translate between single-ended and differential domains so your ADC/DAC see the format they’re designed for, maximising noise immunity and dynamic range.
+
+-----------------------------------------------------------------------------------------------------------------------
+
