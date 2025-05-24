@@ -171,3 +171,54 @@ note: last point means, be ready to translate between single-ended and different
 
 -----------------------------------------------------------------------------------------------------------------------
 
+SYSTEM REQUIREMENTS: MISCELLANEOUS
+
+Mechanical
+• PCB dimension constraints, mounting holes, connector placement, which case are we designing for (conductor?)
+
+Connectors
+• Debugging interface, input/output connector types (SMA, BNC, etc…).
+
+Peripherals
+• LED to indicate power on, LED(s) connected to MCU for status information.
+
+Other (but very important)
+• Timing (crystal frequencies, types, etc…).
+• ESD protection and filtering for EMC.
+• Biasing for single-supply analogue circuitry.
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+**Why do we need op-amp ?**
+
+Many real-world analog signals are AC, meaning they oscillate above and below a reference point (usually 0 V). Think of:
+
+- Audio (sine waves around 0 V)
+
+- Sensor outputs (AC-coupled data)
+
+- Communications signals (modulated carriers)
+
+Because they swing positive and negative, a converter needs to see both halves of the waveform to digitize or recreate it faithfully.
+
+- Single-Supply Limitation
+    On a 0 … 3.3 V rail you lose the “below 0 V” half—you’d clip every negative swing.
+
+- Mid-Rail “Virtual Ground”
+    By biasing everything around 1.65 V, we map ±1.65 V of true signal swing into the 0 … 3.3 V window:
+
+        –1 V → 0.65 V
+
+        +1 V → 2.65 V
+
+- Why the Op-Amp?
+    A bare resistor divider gives you 1.65 V but can’t drive anything; hooking up your ADC front-end or filters will pull that node off center.
+    An op-amp in voltage-follower mode:
+
+        - Buffers the divider so it stays rock-solid at 1.65 V
+
+        - Presents low output impedance, able to feed multiple analog blocks without sag
+
+In short: signals oscillate around zero → we bias them around mid-supply → the op-amp makes that bias stiff and reliable so your ADC/DAC can handle the “negative” half of every waveform.
+
